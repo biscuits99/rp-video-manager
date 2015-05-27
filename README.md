@@ -5,6 +5,8 @@ Currently only supports RetroPie 3 beta 2. And it WILL overwrite any custom edit
 Installation
 ============
 
+This should be run from the home directory "/home/pi"
+
 ```
 wget https://github.com/biscuits99/rp-video-manager/releases/download/v0.1/video-manager.zip
 unzip video-manager.zip

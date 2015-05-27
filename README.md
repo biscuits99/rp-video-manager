@@ -15,3 +15,7 @@ chmod 755 snes-videomode.sh
 ./snes-videomode.sh
 ```
 
+Uninstall
+==========
+Make sure your video settings are as you want them, then delete this directory:
+/home/pi/video-manager

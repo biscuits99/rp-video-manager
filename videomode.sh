@@ -18,7 +18,7 @@ break
 
         "Shader")
 echo "Updating files to use snes.glslp shader"
-cp ~/rp-video-manager/system-retroarch/retroarch-shader.cfg /opt/retropie/configs/snes/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/snes/retroarch-shader.cfg /opt/retropie/configs/snes/retroarch.cfg
 cp ~/rp-video-manager/all-videomodes/videomodes-original.cfg /opt/retropie/configs/all/videomodes.cfg
             echo "Shader has now been applied"
             break
@@ -26,7 +26,7 @@ cp ~/rp-video-manager/all-videomodes/videomodes-original.cfg /opt/retropie/confi
 
         "Overlays")
 # Copy Shader
-cp ~/rp-video-manager/system-retroarch/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/
+cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/
 
 # Copy VideoModes
 cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg

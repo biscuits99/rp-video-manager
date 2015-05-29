@@ -2,10 +2,10 @@
 # Updates RetroArch emulator to use snes.glslp shader
 
 echo "WARNING!! This WILL overwrite your system specific retroarch.cfg files, so if you have made changes to them, please backup first."
-"Only tested in RetroPie 3 beta 2"
+echo "Only tested in RetroPie 3 beta 2"
 echo "Default will reset back to the defaults in RetroPie 3 beta 2"
-"Shaders tend to be better for 720p"
-"Overlays set for 1080p - they *may* work on other TV resolution"
+echo "Shaders tend to be better for 720p"
+echo "Overlays set for 1080p - they *may* work on other TV resolution"
 
 PS3='Choose your video output: '
 options=("Default" "Shader" "Overlays" "Quit")

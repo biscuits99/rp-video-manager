@@ -3,10 +3,13 @@
 # rp-video-manager
 
 Video output tool by Floob
+
 v0.1 27-05-2015
+
 Initial release, SNES only.
 
 v0.2 29-05-2015
+
 Added more systems and shader options
 
 Overlays made by "patl"

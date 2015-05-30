@@ -2,20 +2,128 @@
 # Updates RetroArch emulator to use snes.glslp shader
 
 echo "WARNING!! This WILL overwrite your system specific retroarch.cfg files, so if you have made changes to them, please backup first."
+echo ""
 echo "Only tested in RetroPie 3 beta 2"
+echo ""
 echo "Default will reset back to the defaults in RetroPie 3 beta 2"
+echo ""
 echo "Shaders tend to be better for 720p"
 echo "Overlays set for 1080p - they *may* work on other TV resolution"
 
 PS3='Choose your video output: '
-options=("Default" "Shader" "Overlays" "Quit")
+options=("Backup-Settings" "Restore-Backup" "Default" "Shader" "Overlays" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
 
 
 
+"Backup-Settings")
+cp /opt/retropie/configs/all/videomodes.cfg ~/rp-video-manager/backup/videomodes-backup.cfg 
 
+# SNES
+cp /opt/retropie/configs/snes/retroarch.cfg ~/rp-video-manager/backup/snes/retroarch-backup.cfg 
+
+# Atari Lynx
+cp /opt/retropie/configs/atarilynx/retroarch.cfg ~/rp-video-manager/backup/atarilynx/retroarch-backup.cfg 
+
+# FBA
+cp /opt/retropie/configs/fba/retroarch.cfg ~/rp-video-manager/backup/fba/retroarch-backup.cfg 
+
+# GameGear
+cp /opt/retropie/configs/gamegear/retroarch.cfg ~/rp-video-manager/backup/gamegear/retroarch-backup.cfg 
+
+# Game Boy
+cp /opt/retropie/configs/gb/retroarch.cfg ~/rp-video-manager/backup/gb/retroarch-backup.cfg 
+
+# Game Boy Advance
+cp /opt/retropie/configs/gba/retroarch.cfg ~/rp-video-manager/backup/gba/retroarch-backup.cfg 
+
+# Game Boy Colour
+cp /opt/retropie/configs/gbc/retroarch.cfg ~/rp-video-manager/backup/gbc/retroarch-backup.cfg 
+
+# Sega MasterSystem
+cp /opt/retropie/configs/mastersystem/retroarch.cfg ~/rp-video-manager/backup/mastersystem/retroarch-backup.cfg 
+
+# Sega Megadrive
+cp /opt/retropie/configs/megadrive/retroarch.cfg ~/rp-video-manager/backup/megadrive/retroarch-backup.cfg 
+
+# Neo Geo
+cp /opt/retropie/configs/neogeo/retroarch.cfg ~/rp-video-manager/backup/neogeo/retroarch-backup.cfg 
+
+# NES
+cp /opt/retropie/configs/nes/retroarch.cfg ~/rp-video-manager/backup/nes/retroarch-backup.cfg 
+
+# PSX
+cp /opt/retropie/configs/psx/retroarch.cfg ~/rp-video-manager/backup/psx/retroarch-backup.cfg 
+
+# Sega 32x
+cp /opt/retropie/configs/sega32x/retroarch.cfg ~/rp-video-manager/backup/sega32x/retroarch-backup.cfg 
+
+# Sega CD
+cp  /opt/retropie/configs/segacd/retroarch.cfg ~/rp-video-manager/backup/segacd/retroarch-backup.cfg
+
+echo "Backup complete"
+
+break
+            ;;
+            
+            
+            
+            
+            "Restore-Backup")
+
+cp ~/rp-video-manager/backup/videomodes-backup.cfg /opt/retropie/configs/all/videomodes.cfg 
+
+# SNES
+cp ~/rp-video-manager/backup/snes/retroarch-backup.cfg /opt/retropie/configs/snes/retroarch.cfg 
+
+# Atari Lynx
+cp ~/rp-video-manager/backup/atarilynx/retroarch-backup.cfg /opt/retropie/configs/atarilynx/retroarch.cfg 
+
+# FBA
+cp ~/rp-video-manager/backup/fba/retroarch-backup.cfg /opt/retropie/configs/fba/retroarch.cfg 
+
+# GameGear
+cp ~/rp-video-manager/backup/gamegear/retroarch-backup.cfg /opt/retropie/configs/gamegear/retroarch.cfg  
+
+# Game Boy
+cp ~/rp-video-manager/backup/gb/retroarch-backup.cfg /opt/retropie/configs/gb/retroarch.cfg  
+
+# Game Boy Advance
+cp ~/rp-video-manager/backup/gba/retroarch-backup.cfg /opt/retropie/configs/gba/retroarch.cfg  
+
+# Game Boy Colour
+cp ~/rp-video-manager/backup/gbc/retroarch-backup.cfg /opt/retropie/configs/gbc/retroarch.cfg  
+
+# Sega MasterSystem
+cp ~/rp-video-manager/backup/mastersystem/retroarch-backup.cfg /opt/retropie/configs/mastersystem/retroarch.cfg 
+
+# Sega Megadrive
+cp ~/rp-video-manager/backup/megadrive/retroarch-backup.cfg /opt/retropie/configs/megadrive/retroarch.cfg 
+
+# Neo Geo
+cp ~/rp-video-manager/backup/neogeo/retroarch-backup.cfg /opt/retropie/configs/neogeo/retroarch.cfg  
+
+# NES
+cp ~/rp-video-manager/backup/nes/retroarch-backup.cfg /opt/retropie/configs/nes/retroarch.cfg  
+
+# PSX
+cp ~/rp-video-manager/backup/psx/retroarch-backup.cfg /opt/retropie/configs/psx/retroarch.cfg  
+
+# Sega 32x
+cp ~/rp-video-manager/backup/sega32x/retroarch-backup.cfg /opt/retropie/configs/sega32x/retroarch.cfg  
+
+# Sega CD
+cp  ~/rp-video-manager/backup/segacd/retroarch-backup.cfg /opt/retropie/configs/segacd/retroarch.cfg 
+
+echo "Backup complete"
+
+break
+            ;;
+            
+            
+            
 
 
         "Default")

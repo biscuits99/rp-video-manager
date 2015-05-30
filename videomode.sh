@@ -117,7 +117,7 @@ cp ~/rp-video-manager/backup/sega32x/retroarch-backup.cfg /opt/retropie/configs/
 # Sega CD
 cp  ~/rp-video-manager/backup/segacd/retroarch-backup.cfg /opt/retropie/configs/segacd/retroarch.cfg 
 
-echo "Backup complete"
+echo "Backup has been restored"
 
 break
             ;;

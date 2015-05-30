@@ -306,46 +306,46 @@ cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulato
 cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
 
 # SNES
-cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/snes/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/snes/retroarch.cfg
 
 # Atari Lynx
-cp ~/rp-video-manager/system-retroarch/atarilynx/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/atarilynx/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/atarilynx/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/atarilynx/retroarch.cfg
 
 # FBA
-cp ~/rp-video-manager/system-retroarch/fba/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/fba/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/fba/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/fba/retroarch.cfg
 
 # GameGear
-cp ~/rp-video-manager/system-retroarch/gamegear/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/gamegear/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/gamegear/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/gamegear/retroarch.cfg
 
 # Game Boy
-cp ~/rp-video-manager/system-retroarch/gb/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/gb/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/gb/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/gb/retroarch.cfg
 
 # Game Boy Advance
-cp ~/rp-video-manager/system-retroarch/gba/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/gba/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/gba/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/gba/retroarch.cfg
 
 # Game Boy Colour
-cp ~/rp-video-manager/system-retroarch/gbc/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/gbc/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/gbc/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/gbc/retroarch.cfg
 
 # Sega MasterSystem
-cp ~/rp-video-manager/system-retroarch/mastersystem/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/mastersystem/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/mastersystem/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/mastersystem/retroarch.cfg
 
 # Sega Megadrive
-cp ~/rp-video-manager/system-retroarch/megadrive/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/megadrive/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/megadrive/retroarch.cfg
 
 # Neo Geo
-cp ~/rp-video-manager/system-retroarch/neogeo/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/neogeo/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/neogeo/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/neogeo/retroarch.cfg
 
 # NES
-cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/nes/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/nes/retroarch.cfg
 
 # PSX
-cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/psx/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/psx/retroarch.cfg
 
 # Sega 32x
-cp ~/rp-video-manager/system-retroarch/sega32x/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/sega32x/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/sega32x/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/sega32x/retroarch.cfg
 
 # Sega CD
-cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay-no-smooth.cfg /opt/retropie/configs/segacd/retroarch.cfg
+cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/segacd/retroarch.cfg
 
 # General overlays
 mkdir -p /opt/retropie/emulators/retroarch/overlays/16-9

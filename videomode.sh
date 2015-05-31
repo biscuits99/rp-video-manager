@@ -11,7 +11,7 @@ echo "Shaders tend to be better for 720p"
 echo "Overlays set for 1080p - they *may* work on other TV resolution"
 
 PS3='Choose your video output: '
-options=("Backup-Settings" "Restore-Backup" "Default" "Shader" "Overlays" "Overlays-no-smooth" "Quit")
+options=("Backup-Settings" "Restore-Backup" "Default" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-patrickm-5x" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -353,6 +353,44 @@ cp -r ~/rp-video-manager/16-9/* /opt/retropie/emulators/retroarch/overlays/16-9/
             echo "Overlays have now been applied - smooth is off"
             break
             ;;
+
+
+
+ "Overlays-patrickm-5x")
+# Copy Overlay
+cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
+cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
+
+# Copy VideoModes
+# cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
+
+# SNES
+cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-patrickm-5x.cfg /opt/retropie/configs/snes/retroarch.cfg
+
+# Sega Megadrive
+cp ~/rp-video-manager/system-retroarch/megadrive/retroarch-overlay-patrickm-5x.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+
+# NES
+cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-patrickm-5x.cfg /opt/retropie/configs/nes/retroarch.cfg
+
+# PSX
+cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm-5x.cfg /opt/retropie/configs/psx/retroarch.cfg
+
+
+
+
+            echo "Overlays 5x integer scale applied for SNES, Megadrive, NES, PSX"
+            echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
+            break
+            ;;
+
+
+
+
+
+
+
+
 
         "Quit")
             break

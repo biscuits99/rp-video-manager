@@ -350,7 +350,7 @@ cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay-smooth-off.cfg /
 # General overlays
 mkdir -p /opt/retropie/emulators/retroarch/overlays/16-9
 cp -r ~/rp-video-manager/16-9/* /opt/retropie/emulators/retroarch/overlays/16-9/
-            echo "Overlays have now been applied"
+            echo "Overlays have now been applied - smooth is off"
             break
             ;;
 

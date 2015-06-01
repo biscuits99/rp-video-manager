@@ -11,7 +11,7 @@ echo "Shaders tend to be better for 720p"
 echo "Overlays set for 1080p - they *may* work on other TV resolution"
 
 PS3='Choose your video output: '
-options=("Backup-Settings" "Restore-Backup" "Default" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-patrickm-5x" "Quit")
+options=("Backup-Settings" "Restore-Backup" "Default" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-patrickm-5x" "Overlays-patrickm-5x-noshader" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -235,7 +235,8 @@ cp ~/rp-video-manager/system-retroarch/sega32x/retroarch-shader.cfg /opt/retropi
 cp ~/rp-video-manager/system-retroarch/segacd/retroarch-shader.cfg /opt/retropie/configs/segacd/retroarch.cfg
 
             echo "Shader has now been applied"
-            break
+            echo "Shaders have been applied to SNES, Atari Lynx, FBA, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
+             break
             ;;
 
 
@@ -295,6 +296,7 @@ cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay.cfg /opt/retropi
 mkdir -p /opt/retropie/emulators/retroarch/overlays/16-9
 cp -r ~/rp-video-manager/16-9/* /opt/retropie/emulators/retroarch/overlays/16-9/
             echo "Overlays have now been applied"
+            echo "Overlays have been applied to SNES, Atari Lynx, FBA, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
             break
             ;;
             
@@ -351,6 +353,7 @@ cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay-smooth-off.cfg /
 mkdir -p /opt/retropie/emulators/retroarch/overlays/16-9
 cp -r ~/rp-video-manager/16-9/* /opt/retropie/emulators/retroarch/overlays/16-9/
             echo "Overlays have now been applied - smooth is off"
+            echo "Overlays have been applied to SNES, Atari Lynx, FBA, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
             break
             ;;
 
@@ -384,6 +387,34 @@ cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm-5x.cfg /op
             break
             ;;
 
+
+ "Overlays-patrickm-5x-noshader")
+# Copy Overlay
+cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
+cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
+
+# Copy VideoModes
+# cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
+
+# SNES
+cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/snes/retroarch.cfg
+
+# Sega Megadrive
+cp ~/rp-video-manager/system-retroarch/megadrive/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+
+# NES
+cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/nes/retroarch.cfg
+
+# PSX
+cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/psx/retroarch.cfg
+
+
+
+
+            echo "Overlays 5x integer scale applied for SNES, Megadrive, NES, PSX"
+            echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
+            break
+            ;;
 
 
 

@@ -1,0 +1,16 @@
+[General]
+Background0=9610301
+Background1=5138690
+Background2=1982722
+Background3=993025
+
+Sprite%2010=9610301
+Sprite%2011=5138690
+Sprite%2012=1982722
+Sprite%2013=993025
+
+Sprite%2020=9610301
+Sprite%2021=5138690
+Sprite%2022=1982722
+Sprite%2023=993025
+slectedScheme=default

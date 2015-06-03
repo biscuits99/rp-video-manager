@@ -11,7 +11,7 @@ echo "Shaders tend to be better for 720p"
 echo "Overlays set for 1080p - they *may* work on other TV resolution"
 
 PS3='Choose your video output: '
-options=("Backup-Settings" "Restore-Backup" "Default" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-patrickm-5x" "Overlays-patrickm-5x-noshader" "Quit")
+options=("Backup-Settings" "Restore-Backup" "Default" "Install Required Files" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-No-TV" "Overlays-patrickm-5x" "Overlays-patrickm-5x-noshader" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -54,6 +54,9 @@ cp /opt/retropie/configs/neogeo/retroarch.cfg ~/rp-video-manager/backup/neogeo/r
 # NES
 cp /opt/retropie/configs/nes/retroarch.cfg ~/rp-video-manager/backup/nes/retroarch-backup.cfg 
 
+# PC Engine
+cp /opt/retropie/configs/pcengine/retroarch.cfg ~/rp-video-manager/backup/pcengine/retroarch-backup.cfg 
+
 # PSX
 cp /opt/retropie/configs/psx/retroarch.cfg ~/rp-video-manager/backup/psx/retroarch-backup.cfg 
 
@@ -62,6 +65,12 @@ cp /opt/retropie/configs/sega32x/retroarch.cfg ~/rp-video-manager/backup/sega32x
 
 # Sega CD
 cp  /opt/retropie/configs/segacd/retroarch.cfg ~/rp-video-manager/backup/segacd/retroarch-backup.cfg
+
+# Doom
+cp  /opt/retropie/configs/doom/retroarch.cfg ~/rp-video-manager/backup/doom/retroarch-backup.cfg
+
+# Quake
+cp  /opt/retropie/configs/quake/retroarch.cfg ~/rp-video-manager/backup/quake/retroarch-backup.cfg
 
 echo "Backup complete"
 
@@ -111,11 +120,20 @@ cp ~/rp-video-manager/backup/nes/retroarch-backup.cfg /opt/retropie/configs/nes/
 # PSX
 cp ~/rp-video-manager/backup/psx/retroarch-backup.cfg /opt/retropie/configs/psx/retroarch.cfg  
 
+# PC Engine
+cp ~/rp-video-manager/backup/pcengine/retroarch-backup.cfg /opt/retropie/configs/pcengine/retroarch.cfg  
+
 # Sega 32x
 cp ~/rp-video-manager/backup/sega32x/retroarch-backup.cfg /opt/retropie/configs/sega32x/retroarch.cfg  
 
 # Sega CD
 cp  ~/rp-video-manager/backup/segacd/retroarch-backup.cfg /opt/retropie/configs/segacd/retroarch.cfg 
+
+# Doom
+cp  ~/rp-video-manager/backup/doom/retroarch-backup.cfg /opt/retropie/configs/doom/retroarch.cfg 
+
+# Quake
+cp  ~/rp-video-manager/backup/quake/retroarch-backup.cfg /opt/retropie/configs/quake/retroarch.cfg 
 
 echo "Backup has been restored"
 
@@ -123,7 +141,34 @@ break
             ;;
             
             
-            
+         
+         "Install Required Files")
+         
+         echo "Please wait"
+         
+# Copy Shader across
+cp ~/rp-video-manager/shaders/crt-hyllian-sharpness-hack.glsl /opt/retropie/emulators/retroarch/shader/crt-hyllian-sharpness-hack.glsl         
+
+# Copy Shader
+cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/Brighter-with_Contrast.glslp
+
+# General overlays
+mkdir -p /opt/retropie/emulators/retroarch/overlays/1080p_4-3
+cp -r ~/rp-video-manager/1080p_4-3/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
+
+# Gameboy Palette
+mkdir -p /home/pi/RetroPie/BIOS/palettes
+cp ~/rp-video-manager/shaders/default.pal /home/pi/RetroPie/BIOS/palettes/
+
+# Copy Overlay for patrickm settings
+cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
+cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
+
+echo "Required files installed - you dont need to run this again"
+         
+     break
+            ;;    
+         
 
 
         "Default")
@@ -172,6 +217,11 @@ cp ~/rp-video-manager/system-retroarch/sega32x/retroarch-original.cfg /opt/retro
 # Sega CD
 cp ~/rp-video-manager/system-retroarch/segacd/retroarch-original.cfg /opt/retropie/configs/segacd/retroarch.cfg
 
+# Doom
+cp ~/rp-video-manager/system-retroarch/doom/retroarch-original.cfg /opt/retropie/configs/doom/retroarch.cfg
+
+# Quake
+cp ~/rp-video-manager/system-retroarch/quake/retroarch-original.cfg /opt/retropie/configs/quake/retroarch.cfg
 
 
 
@@ -185,9 +235,6 @@ break
 
 
         "Shader")
-
-# Copy Shader across
-cp ~/rp-video-manager/shaders/crt-hyllian-sharpness-hack.glsl /opt/retropie/emulators/retroarch/shader/crt-hyllian-sharpness-hack.glsl
 
 # Set Video Modes Back
 cp ~/rp-video-manager/all-videomodes/videomodes-original.cfg /opt/retropie/configs/all/videomodes.cfg
@@ -244,8 +291,7 @@ cp ~/rp-video-manager/system-retroarch/segacd/retroarch-shader.cfg /opt/retropie
 
 
         "Overlays")
-# Copy Shader
-cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/Brighter-with_Contrast.glslp
+
 
 # Copy VideoModes
 cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
@@ -255,9 +301,6 @@ cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay.cfg /opt/retropie/
 
 # Atari Lynx
 cp ~/rp-video-manager/system-retroarch/atarilynx/retroarch-overlay.cfg /opt/retropie/configs/atarilynx/retroarch.cfg
-
-# FBA
-cp ~/rp-video-manager/system-retroarch/fba/retroarch-overlay.cfg /opt/retropie/configs/fba/retroarch.cfg
 
 # GameGear
 cp ~/rp-video-manager/system-retroarch/gamegear/retroarch-overlay.cfg /opt/retropie/configs/gamegear/retroarch.cfg
@@ -292,17 +335,16 @@ cp ~/rp-video-manager/system-retroarch/sega32x/retroarch-overlay.cfg /opt/retrop
 # Sega CD
 cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay.cfg /opt/retropie/configs/segacd/retroarch.cfg
 
-# General overlays
-mkdir -p /opt/retropie/emulators/retroarch/overlays/16-9
-cp -r ~/rp-video-manager/16-9/* /opt/retropie/emulators/retroarch/overlays/16-9/
+
+
+
             echo "Overlays have now been applied"
-            echo "Overlays have been applied to SNES, Atari Lynx, FBA, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
+            echo "Overlays have been applied to SNES, Atari Lynx, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
+            echo "This mode attempts to emulate a 4:3 CRT experience."
             break
             ;;
             
              "Overlays-no-smooth")
-# Copy Shader
-cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/Brighter-with_Contrast.glslp
 
 # Copy VideoModes
 cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
@@ -312,9 +354,6 @@ cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-smooth-off.cfg /op
 
 # Atari Lynx
 cp ~/rp-video-manager/system-retroarch/atarilynx/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/atarilynx/retroarch.cfg
-
-# FBA
-cp ~/rp-video-manager/system-retroarch/fba/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/fba/retroarch.cfg
 
 # GameGear
 cp ~/rp-video-manager/system-retroarch/gamegear/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/gamegear/retroarch.cfg
@@ -349,20 +388,55 @@ cp ~/rp-video-manager/system-retroarch/sega32x/retroarch-overlay-smooth-off.cfg 
 # Sega CD
 cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay-smooth-off.cfg /opt/retropie/configs/segacd/retroarch.cfg
 
-# General overlays
-mkdir -p /opt/retropie/emulators/retroarch/overlays/16-9
-cp -r ~/rp-video-manager/16-9/* /opt/retropie/emulators/retroarch/overlays/16-9/
+
             echo "Overlays have now been applied - smooth is off"
-            echo "Overlays have been applied to SNES, Atari Lynx, FBA, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
+            echo "Overlays have been applied to SNES, Atari Lynx, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
+            echo "This mode attempts to emulate a 4:3 CRT experience."
             break
             ;;
 
 
 
+ "Overlays-No-TV")
+ # Copy VideoModes
+cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
+
+# SNES
+cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-no-tv.cfg /opt/retropie/configs/snes/retroarch.cfg
+
+# Sega MasterSystem
+cp ~/rp-video-manager/system-retroarch/mastersystem/retroarch-overlay-no-tv.cfg /opt/retropie/configs/mastersystem/retroarch.cfg
+
+# Sega Megadrive
+cp ~/rp-video-manager/system-retroarch/megadrive/retroarch-overlay-no-tv.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+
+# Neo Geo
+cp ~/rp-video-manager/system-retroarch/neogeo/retroarch-overlay-no-tv.cfg /opt/retropie/configs/neogeo/retroarch.cfg
+
+# NES
+cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-no-tv.cfg /opt/retropie/configs/nes/retroarch.cfg
+
+# PSX
+cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-no-tv.cfg /opt/retropie/configs/psx/retroarch.cfg
+
+# Sega 32x
+cp ~/rp-video-manager/system-retroarch/sega32x/retroarch-overlay-no-tv.cfg /opt/retropie/configs/sega32x/retroarch.cfg
+
+# Sega CD
+cp ~/rp-video-manager/system-retroarch/segacd/retroarch-overlay-no-tv.cfg /opt/retropie/configs/segacd/retroarch.cfg
+ 
+ echo "Overlays have now been applied - No TV Border"
+            echo "Overlays have been applied to SNES, Mastersystem, Megadrive, Neo Geo, NES, PSX, Sega 32X, Sega CD"
+            echo "This mode attempts to emulate a 4:3 CRT experience."
+ 
+   break
+            ;;
+            
+            
+            
+
  "Overlays-patrickm-5x")
-# Copy Overlay
-cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
-cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
+
 
 # Copy VideoModes
 # cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
@@ -379,19 +453,21 @@ cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-patrickm-5x.cfg /op
 # PSX
 cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm-5x.cfg /opt/retropie/configs/psx/retroarch.cfg
 
+# Doom
+cp ~/rp-video-manager/system-retroarch/doom/retroarch-overlay-patrickm-5x.cfg /opt/retropie/configs/doom/retroarch.cfg
+
+# Quake
+cp ~/rp-video-manager/system-retroarch/quake/retroarch-overlay-patrickm-5x.cfg /opt/retropie/configs/quake/retroarch.cfg
 
 
 
-            echo "Overlays 5x integer scale applied for SNES, Megadrive, NES, PSX"
+            echo "Overlays 5x integer scale applied for SNES, Megadrive, NES, PSX, Doom, Quake"
             echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
             break
             ;;
 
 
  "Overlays-patrickm-5x-noshader")
-# Copy Overlay
-cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
-cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
 
 # Copy VideoModes
 # cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
@@ -408,10 +484,14 @@ cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-patrickm-5x-noshade
 # PSX
 cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/psx/retroarch.cfg
 
+# Doom
+cp ~/rp-video-manager/system-retroarch/doom/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/doom/retroarch.cfg
+
+# Quake
+cp ~/rp-video-manager/system-retroarch/quake/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/quake/retroarch.cfg
 
 
-
-            echo "Overlays 5x integer scale applied for SNES, Megadrive, NES, PSX"
+            echo "Overlays 5x integer scale applied for SNES, Megadrive, NES, PSX, Doom, Quake"
             echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
             break
             ;;

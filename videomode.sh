@@ -9,7 +9,10 @@ echo "Only tested in RetroPie 3 beta 2"
 echo ""
 echo "Overlays set for 1080p - they *may* work on other TV resolution"
 echo "!!Remember to choose the Install option!!"
+echo ""
 echo "https://github.com/biscuits99/rp-video-manager"
+echo ""
+echo ""
 
 PS3='Choose your video output: '
     options=("Backup-Settings" "Restore-Backup" "Default" "Install Required Files" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-No-TV"  "Overlays-patrickm-5x" "Overlays-patrickm" "Quit")

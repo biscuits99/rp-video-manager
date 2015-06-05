@@ -12,7 +12,7 @@ echo "!!Remember to choose the Install option!!"
 echo "https://github.com/biscuits99/rp-video-manager"
 
 PS3='Choose your video output: '
-    options=("Backup-Settings" "Restore-Backup" "Default" "Install Required Files" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-No-TV"  "Overlays-patrickm-5x" "Quit")
+    options=("Backup-Settings" "Restore-Backup" "Default" "Install Required Files" "Shader" "Overlays" "Overlays-no-smooth" "Overlays-No-TV"  "Overlays-patrickm-5x" "Overlays-patrickm" "Quit")
             select opt in "${options[@]}"
             do
                 case $opt in
@@ -166,6 +166,8 @@ PS3='Choose your video output: '
     # Copy Overlay for patrickm settings. From the shaders dir which isnt quite right but it doesnt matter.
     cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
     cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.cfg
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.png
     
     echo "Required files installed - you dont need to run this again"
     
@@ -495,7 +497,39 @@ PS3='Choose your video output: '
                 break
                 ;;
     
+         "Overlays-patrickm")
     
+    # Copy VideoModes
+    cp ~/rp-video-manager/all-videomodes/videomodes-updated2.cfg /opt/retropie/configs/all/videomodes.cfg
+    
+    # SNES
+    cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-patrickm.cfg /opt/retropie/configs/snes/retroarch.cfg
+    
+    # Sega Megadrive
+    cp ~/rp-video-manager/system-retroarch/megadrive/retroarch-overlay-patrickm.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+    
+    # NES
+    cp ~/rp-video-manager/system-retroarch/nes/retroarch-overlay-patrickm.cfg /opt/retropie/configs/nes/retroarch.cfg
+    
+	# PC Engine
+    cp ~/rp-video-manager/system-retroarch/pcengine/retroarch-overlay-patrickm.cfg /opt/retropie/configs/pcengine/retroarch.cfg
+	
+    # PSX
+    cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm.cfg /opt/retropie/configs/psx/retroarch.cfg
+    
+    # Doom
+    cp ~/rp-video-manager/system-retroarch/doom/retroarch-overlay-patrickm.cfg /opt/retropie/configs/doom/retroarch.cfg
+    
+    # Quake
+    cp ~/rp-video-manager/system-retroarch/quake/retroarch-overlay-patrickm.cfg /opt/retropie/configs/quake/retroarch.cfg
+    
+    
+                echo "Overlays 4x integer scale applied for SNES, Megadrive, NES, PC Engine, PSX, Doom, Quake"
+				echo "There are no shaders applied with these settings"
+                echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
+				echo "http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/"
+                break
+                ;;
     
     
     

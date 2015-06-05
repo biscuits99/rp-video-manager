@@ -2,23 +2,10 @@
 
 # rp-video-manager
 
-Video output tool by Floob
-
-v0.1 27-05-2015
-
-Initial release, SNES only.
-
-v0.2 29-05-2015
-
-Added more systems and shader options
-
-Overlays made by "patl"
-
-Shader tweak by "patrickm"
-
+Video Manager tool by Floob
 www.smartretro.co.uk/forums
 
-Tool to quickly update video modes in RetroPie. This will swap between default, shaders and overlays.
+Tool to quickly update video modes in RetroPie. This will swap between default, shaders and overlays. Designed to emulate a CRT experience on a hi-def TV.
 Currently only supports RetroPie 3 beta 2. And it WILL overwrite any custom edits you may have made to system specific retroarch.cfg files.
 
 Installation
@@ -39,3 +26,5 @@ Uninstall
 ==========
 Make sure your video settings are as you want them, then delete this directory:
 /home/pi/rp-video-manager
+
+You can use the "rm -rf rp-video-manager" command

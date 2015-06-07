@@ -1,0 +1,55 @@
+
+
+"Backup-Settings"
+This copies all your existing settings into a safe area ready to restore if you want to.
+These only get overwritten if you choose this option again.
+
+"Restore-Backup"
+This will used the files that were backed up, and copy them back for you.
+
+"Default"
+This resets your files to the stock install of RetroPie 3 beta 2.
+
+"Install Required Files"
+This copies the extra overlays and shaders etc.. across to the correct directories on your Pi. You only need to run this once per version of the Video Manager. It doesnt do any harm if you run it more than once.
+
+
+"Use Shaders"
+This will apply a shader file to the systems, as opposed to using overlays at all.
+
+"Overlays"
+These are the settings from user "patl" found here:
+http://blog.petrockblock.com/forums/topic/scanlines-overlays-an-configs-for-softer-look/
+
+"Overlays-no-smooth"
+These are the settings from user "patl" found here:
+http://blog.petrockblock.com/forums/topic/scanlines-overlays-an-configs-for-softer-look/
+The only difference here is that smoothing has been turned off.
+
+"Overlays-No-TV"
+These are the settings from user "patl" found here:
+http://blog.petrockblock.com/forums/topic/scanlines-overlays-an-configs-for-softer-look/
+There is no TV border showing on the overlay here.
+
+"Consoles-1080p-5x"
+These are the settings from user "patrickm" found here:
+http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/
+
+patrickm has said "I think 5x is preferable for most systems that displayed on a CRT TV such as NES, SNES, and Genesis because it doesn’t show any of the overscan that was cropped on a real CRT and it doesn’t result in any letterboxing of the image, which takes full advantage of the screen/TV’s display area."
+
+
+"Consoles-1080p"
+These are the settings from user "patrickm" found here:
+http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/
+
+patrickm has said "some people might prefer 4x because the scanlines are slightly bolder/thicker at that scale, and some people like bolder scanlines. Or, someone might simply want to see every line put out by the console, even if it wasn’t meant to be displayed."
+
+"Consoles-720p"
+These are the settings from user "patrickm" found here:
+http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/
+These are designed for a 720p screen
+
+"Quit"
+This will exit the tool, making no changes.
+
+

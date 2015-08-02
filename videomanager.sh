@@ -1,32 +1,45 @@
-#!/bin/bash
-# Updates RetroArch emulator to use user specified resolution
-clear
-echo ""
-echo "WARNING!! This WILL overwrite your system specific retroarch.cfg files"
-echo "So use the backup option if you have made changes to them"
-echo ""
-echo "Only tested in RetroPie 3 beta 2"
-echo ""
-echo "Overlays set for 1080p unless stated - they *may* work on other TV resolution"
-echo "!!Remember to choose the Install option!!"
-echo ""
-echo "If you arent sure which option to use, read info here:"
-echo "https://github.com/biscuits99/rp-video-manager/blob/master/info.txt"
-echo ""
-echo ""
 
-PS3='Choose your video output: '
-    options=("Backup-Settings" "Restore-Backup" "Default" "Install Required Files" "Use Shaders" "Overlays" "Overlays-no-smooth" "Overlays-No-TV" "Consoles-1080p-5x" "Consoles-1080p" "Consoles-720p" "Quit")
-            select opt in "${options[@]}"
-            do
-                case $opt in
+#!/bin/bash
+clear
+#  Set select construct prompts for each menu level.
+typeset -r MAINPROMPT="Select a main option: "
+typeset -r HIDEFPROMPT="Select 1080p option: "
+typeset -r SDDEFPROMPT="Select 720p option: "
+typeset -r CONFIGPROMPT="Config Menu: "
+
+#  Loop main menu until user exits explicitly.
+while :
+do
+  echo "Video Manager Main Menu"
+  PS3=$MAINPROMPT  # PS3 is the prompt for the select construct.
+
+  select option in "Config Menu" "Apply Shaders" "Overlays for 1080p" "Overlays for 720p" Quit
+  do
+    case $REPLY in   # REPLY is set by the select construct, and is the number of the selection.
     
     
-    #Backup existing files and copy them into the new backup folders.
-	
-                        "Backup-Settings")
+    
+    
+    
+    1) # Config Menu
+         #  Loop sub menu until user exits explicitly.
+         while :
+         do
+           echo "Configuration Menu"
+           PS3=$CONFIGPROMPT
+           select option1 in "Backup Settings" "Restore Backup" "Reset to Default" "Install Required Files" "Set MD to Picodrive" "Set MD to GenesisPlusGX" Quit
+           do
+             case $REPLY in
+               1) # Backup Settings
+                  echo ""
+                  echo ""
+                  
+                   #Backup existing files and copy them into the new backup folders.
 	#Backup existing videomodes.cfg file. This may not already exist though.
             cp /opt/retropie/configs/all/videomodes.cfg ~/rp-video-manager/backup/videomodes-backup.cfg
+            
+    #Backup existing retroarch-core-options.cfg
+            cp /opt/retropie/configs/all/retroarch-core-options.cfg ~/rp-video-manager/backup/retroarch-core-options-backup.cfg
     
     # SNES
             cp /opt/retropie/configs/snes/retroarch.cfg ~/rp-video-manager/backup/snes/retroarch-backup.cfg
@@ -82,15 +95,20 @@ PS3='Choose your video output: '
             echo "Backup complete"
 			echo "Backed up Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES, Doom, Quake"
     
-            break
-            ;;
-    
-    #Copies files that were backed up, back into live directories
-    
-    
-            "Restore-Backup")
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+               2) # Restore Backup
+                  echo ""
+                  echo ""
+                  
+                   #Copies files that were backed up, back into live directories
     #Retore blank videomodes file.
             cp ~/rp-video-manager/backup/videomodes-backup.cfg /opt/retropie/configs/all/videomodes.cfg
+            
+            
+    #Restore existing retroarch-core-options.cfg
+    cp ~/rp-video-manager/backup/retroarch-core-options-backup.cfg /opt/retropie/configs/all/retroarch-core-options.cfg
     
     # SNES
             cp ~/rp-video-manager/backup/snes/retroarch-backup.cfg /opt/retropie/configs/snes/retroarch.cfg
@@ -146,46 +164,20 @@ PS3='Choose your video output: '
             echo "Backup has been restored"
 			echo "Restored Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES, Doom, Quake"
     
-            break
-            ;;
-    
-    
-    
-            "Install Required Files")
-    
-            echo "Please wait"
-    
-    # Copy Shaders across
-            cp ~/rp-video-manager/shaders/crt-hyllian-sharpness-hack.glsl /opt/retropie/emulators/retroarch/shader/crt-hyllian-sharpness-hack.glsl
-            cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/Brighter-with_Contrast.glslp
-    
-    # General overlays
-            mkdir -p /opt/retropie/emulators/retroarch/overlays/1080p_4-3
-            cp -r ~/rp-video-manager/1080p_4-3/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
-    
-    # Gameboy Palette
-    mkdir -p /home/pi/RetroPie/BIOS/palettes
-    cp ~/rp-video-manager/shaders/default.pal /home/pi/RetroPie/BIOS/palettes/
-    
-    # Copy Overlay for patrickm settings. From the shaders dir which isnt quite right but it doesnt matter.
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.cfg
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.png
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.cfg
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.png
-
-    
-    echo "Required files installed - you dont need to run this again"
-    
-         break
-                ;;
-    
-    
-    
-            "Default")
-    # Copy Videomodes.cfg back
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+                  
+                  
+                   3) # Reset to Default
+                  echo ""
+                  echo ""
+                  
+                   # Copy Videomodes.cfg back
     cp ~/rp-video-manager/all-videomodes/videomodes-original.cfg /opt/retropie/configs/all/videomodes.cfg
+    
+    #Write the original core options file
+    cp ~/rp-video-manager/all-videomodes/retroarch-core-options-original.cfg /opt/retropie/configs/all/retroarch-core-options.cfg
     
     # SNES
     cp ~/rp-video-manager/system-retroarch/snes/retroarch-original.cfg /opt/retropie/configs/snes/retroarch.cfg
@@ -240,16 +232,103 @@ PS3='Choose your video output: '
     
                 echo "Settings are back to default"
 				echo "Reset Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES, Doom, Quake"
-				
-    break
-                ;;
+				   
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+                  
+                  
+                  
+                        4) # Install Required Files
+                   echo ""
+                   echo "Please wait"
     
+    # Copy Shaders across
+            cp ~/rp-video-manager/shaders/crt-hyllian-sharpness-hack.glsl /opt/retropie/emulators/retroarch/shader/crt-hyllian-sharpness-hack.glsl
+            cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/Brighter-with_Contrast.glslp
     
+    # General overlays
+            mkdir -p /opt/retropie/emulators/retroarch/overlays/1080p_4-3
+            cp -r ~/rp-video-manager/1080p_4-3/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
     
-    #Apply shaders to all systems. Possibly better for 720p output that the overlays.
+    # Gameboy Palette
+    mkdir -p /home/pi/RetroPie/BIOS/palettes
+    cp ~/rp-video-manager/shaders/default.pal /home/pi/RetroPie/BIOS/palettes/
+    
+    # Copy Overlay for patrickm settings. From the shaders dir which isnt quite right but it doesnt matter.
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.cfg
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.png
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.cfg
+    cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.png
+
+    
+    echo "Required files installed - you dont need to run this again"
+    echo ""
+    
+                 
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+                  
+                  
+               5) # Set MD to Picodrive
+                  echo ""
+                  echo ""
+                  
+                  cp ~/rp-video-manager/system-retroarch/emulators/megadrive-picodrive-emulators.cfg /opt/retropie/configs/megadrive/emulators.cfg
+                  
+                  
+                  
+                  echo "Megadrive emulator set to use Picodrive"
+                  echo "It is recommended to use Genesis GX Plus for the overlays to work as well as possible"
+                  echo "You can change this here, or use the normal method of pressing x when starting a game"
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+                  
+                
+                6) # Set MD to GenesisPlusGX
+                  echo ""
+                  echo ""
+                  
+                  cp ~/rp-video-manager/system-retroarch/emulators/megadrive-genesisplusgx-emulators.cfg /opt/retropie/configs/megadrive/emulators.cfg
+                  
+                  
+                  echo "Megadrive emulator set to use Genesis Plus GX"
+                  echo "It is recommended to use Genesis GX Plus for the overlays to work as well as possible"
+                  echo "You can change this here, or use the normal method of pressing x when starting a game"
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;               
+                  
+               7) # Quit
+                  break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
+                  ;;
+                  
+               *) # always allow for the unexpected
+                  echo "Unknown mango operation [${REPLY}]"
+                  break
+                  ;;
+             esac
+           done
+         done
+         break
+         ;;
+
+    
    
-            "Use Shaders")
-    
+	
+	  
+
+	  
+     
+
+      2) # Apply Shaders
+      echo ""
+      echo ""
+      
+      #Apply shaders to all systems. Possibly better for 720p output that the overlays.
     # Set Video Modes Back
     cp ~/rp-video-manager/all-videomodes/videomodes-original.cfg /opt/retropie/configs/all/videomodes.cfg
     
@@ -300,16 +379,24 @@ PS3='Choose your video output: '
     
                 echo "Shader has now been applied"
                 echo "Shaders have been applied to SNES, Atari Lynx, FBA, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PC Engine, PSX, Sega 32X, Sega CD"
-                 break
-                ;;
-    
-    
-    
-    
-    
-            "Overlays")
-    
-    #Apply overlays with the TV border. Designed to emulate a 4:3 approach.
+                echo ""
+     break
+     ;;
+
+      3) # Overlays for 1080p
+      
+       while :
+         do
+           echo "Choose Overlay type for 1080p displays"
+           PS3=$HIDEFPROMPT
+           select option1 in overlays overlays-no-smooth overlays-no-tv consoles-1080p-5x consoles-1080p quit
+           do
+             case $REPLY in
+               1) # overlays
+                  echo ""
+                  echo ""
+                  
+                  #Apply overlays with the TV border. Designed to emulate a 4:3 approach.
 	
     # Copy VideoModes
     cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
@@ -363,12 +450,18 @@ PS3='Choose your video output: '
                 echo "Overlays have been applied to SNES, Atari Lynx, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PC Engine, PSX, Sega 32X, Sega CD"
                 echo "This mode attempts to emulate a 4:3 CRT experience."
 				echo "http://blog.petrockblock.com/forums/topic/scanlines-overlays-an-configs-for-softer-look/"
-                break
-                ;;
-    
-                 "Overlays-no-smooth")
-    
-	#Same as overlays above, but smooth option turned off.
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+                  
+                  
+                  
+                  
+               2) # overlays-no-smooth
+                  echo ""
+                  echo ""
+                  
+                  #Same as overlays above, but smooth option turned off.
 	
     # Copy VideoModes
     cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
@@ -420,13 +513,16 @@ PS3='Choose your video output: '
                 echo "Overlays have been applied to SNES, Atari Lynx, GameGear, GB, GBA, GBC, Mastersystem, Megadrive, Neo Geo, NES, PC Engine, PSX, Sega 32X, Sega CD"
                 echo "This mode attempts to emulate a 4:3 CRT experience."
 				echo "http://blog.petrockblock.com/forums/topic/scanlines-overlays-an-configs-for-softer-look/"
-                break
-                ;;
-    
-    
-    
-     "Overlays-No-TV")
-     # Copy VideoModes
+				echo ""
+
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+                  
+               3) # overlays-no-tv
+               echo ""
+               echo ""
+               
+               # Copy VideoModes
     cp ~/rp-video-manager/all-videomodes/videomodes-updated.cfg /opt/retropie/configs/all/videomodes.cfg
     
     # SNES
@@ -460,20 +556,19 @@ PS3='Choose your video output: '
                 echo "Overlays have been applied to SNES, Mastersystem, Megadrive, Neo Geo, NES, PC Engine, PSX, Sega 32X, Sega CD"
                 echo "This mode attempts to emulate a 4:3 CRT experience."
 				echo "http://blog.petrockblock.com/forums/topic/scanlines-overlays-an-configs-for-softer-look/"
-    
-       break
-                ;;
-    
-    
-    
-    
+				echo ""
    
-    
-    
-     "Consoles-1080p-5x")
-    
-    # Copy VideoModes
+   break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+                  
+               4) # consoles-1080p-5x
+               
+               echo ""
+               echo ""
+               
+                # Copy VideoModes
     cp ~/rp-video-manager/all-videomodes/videomodes-updated2.cfg /opt/retropie/configs/all/videomodes.cfg
+    cp ~/rp-video-manager/all-videomodes/retroarch-core-options-updated.cfg /opt/retropie/configs/all/retroarch-core-options.cfg
     
     # SNES
     cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/snes/retroarch.cfg
@@ -510,13 +605,19 @@ PS3='Choose your video output: '
 				echo "There are no shaders applied with these settings"
                 echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
 				echo "http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/"
+				echo ""
                 break
                 ;;
-    
-         "Consoles-1080p")
-    
-    # Copy VideoModes
+   
+                  
+               5) # consoles-1080p
+               
+               echo ""
+               echo ""
+               
+               # Copy VideoModes
     cp ~/rp-video-manager/all-videomodes/videomodes-updated2.cfg /opt/retropie/configs/all/videomodes.cfg
+    cp ~/rp-video-manager/all-videomodes/retroarch-core-options-updated.cfg /opt/retropie/configs/all/retroarch-core-options.cfg
     
     # SNES
     cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-patrickm.cfg /opt/retropie/configs/snes/retroarch.cfg
@@ -547,14 +648,41 @@ PS3='Choose your video output: '
 				echo "There are no shaders applied with these settings"
                 echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
 				echo "http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/"
+				echo ""
                 break
                 ;;
-    
-    
-             "Consoles-720p")
-    
-    # Copy VideoModes
+   
+                  
+                  
+               6) # quit
+                  break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
+                  ;;
+               *) # always allow for the unexpected
+                  echo "Unknown mango operation [${REPLY}]"
+                  break
+                  ;;
+             esac
+           done
+         done
+         break
+         ;;
+
+      4) # Overlays for 720p
+         #  Loop mango menu until user exits explicitly.
+         while :
+         do
+           echo "Overlays for 720p displays"
+           PS3=$SDDEFPROMPT
+           select option1 in consoles-720p quit
+           do
+             case $REPLY in
+               1) # consoles-720p
+                  echo ""
+                  echo ""
+                  
+                  # Copy VideoModes
     cp ~/rp-video-manager/all-videomodes/videomodes-updated2.cfg /opt/retropie/configs/all/videomodes.cfg
+    cp ~/rp-video-manager/all-videomodes/retroarch-core-options-updated.cfg /opt/retropie/configs/all/retroarch-core-options.cfg
     
     # SNES
     cp ~/rp-video-manager/system-retroarch/snes/retroarch-overlay-patrickm-720p.cfg /opt/retropie/configs/snes/retroarch.cfg
@@ -579,20 +707,35 @@ PS3='Choose your video output: '
 				echo "There are no shaders applied with these settings"
                 echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
 				echo "http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/"
-                break
-                ;;
-    
-    
-    
-    
-    
-    
-            "Quit")
-                break
-                ;;
-            *) echo invalid option;;
-        esac
+				echo ""
+                                
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;
+            
+               2) # quit
+                  break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
+                  ;;
+               *) # always allow for the unexpected
+                  echo "Unknown mango operation [${REPLY}]"
+                  break
+                  ;;
+             esac
+           done
+         done
+         break
+         ;;
+
+
+         5) # Quit
+         break 2  #  Break out 2 levels, out of the select and the main loop.
+         ;;
+      *) # Always code for the unexpected.
+         echo "Unknown option [${REPLY}]"
+         break
+         ;;
+    esac
+  done
 done
 
-
-
+exit 0
+$

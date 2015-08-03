@@ -17,10 +17,7 @@ do
   do
     case $REPLY in   # REPLY is set by the select construct, and is the number of the selection.
     
-    
-    
-    
-    
+
     1) # Config Menu
          #  Loop sub menu until user exits explicitly.
          while :

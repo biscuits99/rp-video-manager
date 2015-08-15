@@ -64,3 +64,4 @@ zip -r /opt/retropie/configs/all/config-details.zip /opt/retropie/configs/*
 That will create the config-details.zip file in the directory shown above, this can either be uploaded to the forum or somewhere like http://www.tinyupload.com/
 You can either FTP the file from the Pi to your PC, or use the samba share, as it should be auto shared, so you just browse to the directory above via windows networking.
 
+

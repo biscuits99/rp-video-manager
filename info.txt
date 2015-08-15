@@ -44,6 +44,9 @@ http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspbe
 
 patrickm has said "some people might prefer 4x because the scanlines are slightly bolder/thicker at that scale, and some people like bolder scanlines. Or, someone might simply want to see every line put out by the console, even if it wasn’t meant to be displayed."
 
+"Thorig-1080p"
+These settings are using new custom overlays that have a different TV overlay used.
+
 "Consoles-720p"
 These are the settings from user "patrickm" found here:
 http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/
@@ -52,4 +55,12 @@ These are designed for a 720p screen
 "Quit"
 This will exit the tool, making no changes.
 
+
+You can package up your setting like this (This will help others debug your problems or share your settings for others to check out)
+
+Type this command when in a SSH session:
+zip -r /opt/retropie/configs/all/config-details.zip /opt/retropie/configs/*
+
+That will create the config-details.zip file in the directory shown above, this can either be uploaded to the forum or somewhere like http://www.tinyupload.com/
+You can either FTP the file from the Pi to your PC, or use the samba share, as it should be auto shared, so you just browse to the directory above via windows networking.
 

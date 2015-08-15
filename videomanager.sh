@@ -24,7 +24,7 @@ do
          do
            echo "Configuration Menu"
            PS3=$CONFIGPROMPT
-           select option1 in "Backup Settings" "Restore Backup" "Reset to Default" "Install Required Files" "Set MD to Picodrive" "Set MD to GenesisPlusGX" Quit
+           select option1 in "Backup Settings" "Restore Backup" "Reset to Default" "Install Required Files" "Set MD to Picodrive" "Set MD to GenesisPlusGX" "Set NES to Nestopia" "Set NES to Fceumm" Quit
            do
              case $REPLY in
                1) # Backup Settings
@@ -248,6 +248,9 @@ do
             mkdir -p /opt/retropie/emulators/retroarch/overlays/1080p_4-3
             cp -r ~/rp-video-manager/1080p_4-3/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
     
+    # Thorig overlays
+    cp -r ~/rp-video-manager/users/thorig/overlays/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
+    
     # Gameboy Palette
     mkdir -p /home/pi/RetroPie/BIOS/palettes
     cp ~/rp-video-manager/shaders/default.pal /home/pi/RetroPie/BIOS/palettes/
@@ -278,7 +281,7 @@ do
                   
                   
                   echo "Megadrive emulator set to use Picodrive"
-                  echo "It is recommended to use Genesis GX Plus for the overlays to work as well as possible"
+                  echo "It is recommended to use Genesis Plus GX for the overlays to work as well as possible"
                   echo "You can change this here, or use the normal method of pressing x when starting a game"
                   
                   break  #  Breaks out of the select, back to the mango loop.
@@ -293,13 +296,36 @@ do
                   
                   
                   echo "Megadrive emulator set to use Genesis Plus GX"
-                  echo "It is recommended to use Genesis GX Plus for the overlays to work as well as possible"
+                  echo "It is recommended to use Genesis Plus GX for the overlays to work as well as possible"
                   echo "You can change this here, or use the normal method of pressing x when starting a game"
                   
                   break  #  Breaks out of the select, back to the mango loop.
-                  ;;               
+                  ;;
                   
-               7) # Quit
+                  7) # Set NES to Nestopia
+                  echo ""
+                  echo ""
+                  
+                  cp ~/rp-video-manager/system-retroarch/emulators/nes-nestopia-emulators.cfg /opt/retropie/configs/nes/emulators.cfg
+                  
+                  echo "NES Emulator set to use Nestopia"
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;                
+                  
+                  8) # Set NES to Fceumm
+                  echo ""
+                  echo ""
+                  
+                  cp ~/rp-video-manager/system-retroarch/emulators/nes-fceumm-emulators.cfg /opt/retropie/configs/nes/emulators.cfg
+                  
+                  echo "NES Emulator set to use Fceumm"
+                  
+                  break  #  Breaks out of the select, back to the mango loop.
+                  ;;                
+
+                  
+               9) # Quit
                   break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
                   ;;
                   
@@ -386,7 +412,7 @@ do
          do
            echo "Choose Overlay type for 1080p displays"
            PS3=$HIDEFPROMPT
-           select option1 in overlays overlays-no-smooth overlays-no-tv consoles-1080p-5x consoles-1080p quit
+           select option1 in overlays overlays-no-smooth overlays-no-tv consoles-1080p-5x consoles-1080p thorig-1080p quit
            do
              case $REPLY in
                1) # overlays
@@ -649,9 +675,48 @@ do
                 break
                 ;;
    
+          
+          
+                  6) # thorig-1080p
+               
+               echo ""
+               echo ""
+               
+               # Copy VideoModes
+    cp ~/rp-video-manager/all-videomodes/videomodes-updated2.cfg /opt/retropie/configs/all/videomodes.cfg
+    
+    # SNES
+    cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/snes/retroarch-overlay-thorig-1080p-snes.cfg /opt/retropie/configs/snes/retroarch.cfg
+    
+    # Sega Mastersystem
+    cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/mastersystem/retroarch-overlay-thorig-1080p-mastersystem.cfg /opt/retropie/configs/mastersystem/retroarch.cfg
+    
+    # Sega Megadrive
+    cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/megadrive/retroarch-overlay-thorig-1080p-megadrive.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+    
+    # Neo Geo
+    cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/neogeo/retroarch-overlay-thorig-1080p-neogeo.cfg /opt/retropie/configs/neogeo/retroarch.cfg
+    
+    # NES
+    cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/nes/retroarch-overlay-thorig-1080p-nes.cfg /opt/retropie/configs/nes/retroarch.cfg
+	
+    # PSX
+    cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/psx/retroarch-overlay-thorig-1080p-psx.cfg /opt/retropie/configs/psx/retroarch.cfg
+    
+
+    
+    
+                echo "Overlays have been applied for SNES, Megadrive, Mastersysten, Neo Geo, NES and PSX"
+				echo "There are no shaders applied with these settings"
+				echo "These settings are from user thorig: http://blog.petrockblock.com/community/members/thorig/"
+				echo ""
+                break
+                ;;
+          
+          
+           
                   
-                  
-               6) # quit
+               7) # quit
                   break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
                   ;;
                *) # always allow for the unexpected

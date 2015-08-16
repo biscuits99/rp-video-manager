@@ -703,6 +703,9 @@ do
     # PSX
     cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/psx/retroarch-overlay-thorig-1080p-psx.cfg /opt/retropie/configs/psx/retroarch.cfg
     
+    # PC Engine
+    cp ~/rp-video-manager/users/thorig/system-retroarch-cfg/pcengine/retroarch-overlay-thorig-1080p-pcengine.cfg /opt/retropie/configs/pcengine/retroarch.cfg
+    
 
     
     

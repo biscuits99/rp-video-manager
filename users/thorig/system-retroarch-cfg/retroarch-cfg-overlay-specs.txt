@@ -1,5 +1,4 @@
-﻿Original file - for reference only
-
+﻿Original File - for reference only
 
 
 ## /opt/retropie/configs/nes/retroarch.cfg
@@ -88,6 +87,21 @@ custom_viewport_x = 363
 custom_viewport_y = 90
 aspect_ratio_index = 22
 input_overlay = /opt/retropie/emulators/retroarch/overlays/1080p_4-3/vp1194x896s4-tv-horizon.cfg
+input_overlay_enable = true
+input_overlay_opacity = 1.0
+input_overlay_scale = 1.0
+video_smooth = true
+
+## /opt/retropie/configs/pcengine/retroarch.cfg
+## overlay configuration
+video_fullscreen_x = 1920
+video_fullscreen_y = 1080
+custom_viewport_width = 1236
+custom_viewport_height = 928
+custom_viewport_x = 342
+custom_viewport_y = 76
+aspect_ratio_index = 22
+input_overlay = /opt/retropie/emulators/retroarch/overlays/1080p_4-3/vp1236x896s4-tv-horizon.cfg
 input_overlay_enable = true
 input_overlay_opacity = 1.0
 input_overlay_scale = 1.0

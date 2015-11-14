@@ -3,6 +3,7 @@
 clear
 #  Set select construct prompts for each menu level.
 typeset -r MAINPROMPT="Select a main option: "
+typeset -r SHADERPROMPT="Please select a shader: "
 typeset -r HIDEFPROMPT="Select 1080p option: "
 typeset -r SDDEFPROMPT="Select 720p option: "
 typeset -r CONFIGPROMPT="Config Menu: "
@@ -203,6 +204,12 @@ do
     # Sega Megadrive
     cp ~/rp-video-manager/system-retroarch/megadrive/retroarch-original.cfg /opt/retropie/configs/megadrive/retroarch.cfg
     
+    # MAME Libretro
+    cp ~/rp-video-manager/system-retroarch/mame-libretro/retroarch-original.cfg /opt/retropie/configs/mame-libretro/retroarch.cfg
+    
+    # MAME Mame4all
+    cp ~/rp-video-manager/system-retroarch/mame-mame4all/retroarch-original.cfg /opt/retropie/configs/mame-mame4all/retroarch.cfg
+    
     # Neo Geo
     cp ~/rp-video-manager/system-retroarch/neogeo/retroarch-original.cfg /opt/retropie/configs/neogeo/retroarch.cfg
     
@@ -250,6 +257,13 @@ do
     
     # Thorig overlays
     cp -r ~/rp-video-manager/users/thorig/overlays/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
+    
+    # davej Shaders
+    cp -r ~/rp-video-manager/users/davej/shaders/crt-pi/* /opt/retropie/emulators/retroarch/shader/
+    
+    # Chito Overlays
+    mkdir -p /opt/retropie/emulators/retroarch/overlays/chito
+    cp -r ~/rp-video-manager/users/chito/overlays/* /opt/retropie/emulators/retroarch/overlays/chito/
     
     # Gameboy Palette
     mkdir -p /home/pi/RetroPie/BIOS/palettes
@@ -348,6 +362,17 @@ do
      
 
       2) # Apply Shaders
+      
+      
+      while :
+         do
+           echo "Choose Shader type"
+           PS3=$SHADERPROMPT
+           select option1 in General-Shader CRT-Shader Quit
+           do
+             case $REPLY in
+               1) # General-Shader      
+      
       echo ""
       echo ""
       
@@ -405,6 +430,77 @@ do
                 echo ""
      break
      ;;
+     
+     2) # CRT-Shader
+     
+     echo ""
+     echo ""
+     
+     # Doom
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/doom/retroarch-shader-davej-doom.cfg /opt/retropie/configs/doom/retroarch.cfg
+
+     # FBA
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/fba/retroarch-shader-davej-fba.cfg /opt/retropie/configs/fba/retroarch.cfg
+     
+     # MAME Libretro
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/mame-libretro/retroarch-shader-davej-mamelibretro.cfg /opt/retropie/configs/mame-libretro/retroarch.cfg
+     
+     # MAME mame4all
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/mame-mame4all/retroarch-shader-davej-mamemame4all.cfg /opt/retropie/configs/mame-mame4all/retroarch.cfg
+     
+     # Mastersystem
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/mastersystem/retroarch-shader-davej-mastersystem.cfg /opt/retropie/configs/mastersystem/retroarch.cfg
+     
+     # Megadrive
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/megadrive/retroarch-shader-davej-megadrive.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+     
+     # Neo Geo
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/neogeo/retroarch-shader-davej-neogeo.cfg /opt/retropie/configs/neogeo/retroarch.cfg
+     
+     # NES
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/nes/retroarch-shader-davej-nes.cfg /opt/retropie/configs/nes/retroarch.cfg
+     
+     # PC Engine
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/pcengine/retroarch-shader-davej-pcengine.cfg /opt/retropie/configs/pcengine/retroarch.cfg
+     
+     # PSX
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/psx/retroarch-shader-davej-psx.cfg /opt/retropie/configs/psx/retroarch.cfg
+     
+     # Quake
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/quake/retroarch-shader-davej-quake.cfg /opt/retropie/configs/quake/retroarch.cfg
+     
+     # Sega32x
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/sega32x/retroarch-shader-davej-sega32x.cfg /opt/retropie/configs/sega32x/retroarch.cfg
+     
+     # Sega CD
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/segacd/retroarch-shader-davej-segacd.cfg /opt/retropie/configs/segacd/retroarch.cfg
+     
+     # SNES
+     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/snes/retroarch-shader-davej-snes.cfg /opt/retropie/configs/snes/retroarch.cfg
+     
+      echo "CRT Shader has now been applied"
+                echo "Shaders have been applied to Doom, FBA, MAME-Libretro, MAME-Mame4all, Mastersystem, Megadrive, Neo Geo, NES, PC Engine, PSX, Quake, Sega32x, Sega CD, SNES"
+                echo ""
+     break
+     ;;
+
+     
+     3) # Quit
+                  break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
+                  ;;
+                  
+     *) # always allow for the unexpected
+                  echo "Unknown mango operation [${REPLY}]"
+                  break
+                  ;;
+             esac
+           done
+         done
+         break
+         ;;
+                  
+                  
+      
 
       3) # Overlays for 1080p
       
@@ -412,7 +508,7 @@ do
          do
            echo "Choose Overlay type for 1080p displays"
            PS3=$HIDEFPROMPT
-           select option1 in overlays overlays-no-smooth overlays-no-tv consoles-1080p-5x consoles-1080p thorig-1080p quit
+           select option1 in overlays overlays-no-smooth overlays-no-tv consoles-1080p-5x consoles-1080p thorig-1080p chito-1080p quit
            do
              case $REPLY in
                1) # overlays
@@ -716,10 +812,53 @@ do
                 break
                 ;;
           
-          
+          7) # chito-1080p
+               
+               echo ""
+               echo ""
            
+           
+           # GameGear
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/gamegear/retroarch-overlay-chito-gamegear.cfg /opt/retropie/configs/gamegear/retroarch.cfg
+
+           # GameBoy
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/gb/retroarch-overlay-chito-gb.cfg /opt/retropie/configs/gb/retroarch.cfg
+           
+           # GameBoy Advance
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/gba/retroarch-overlay-chito-gba.cfg /opt/retropie/configs/gba/retroarch.cfg
+           
+           # GameBoy Colour
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/gbc/retroarch-overlay-chito-gbc.cfg /opt/retropie/configs/gbc/retroarch.cfg
+           
+           # Mastersystem
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/mastersystem/retroarch-overlay-chito-mastersystem.cfg /opt/retropie/configs/mastersystem/retroarch.cfg
+           
+           # Megadrive
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/megadrive/retroarch-overlay-chito-megadrive.cfg /opt/retropie/configs/megadrive/retroarch.cfg
+           
+           # NES
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/nes/retroarch-overlay-chito-nes.cfg /opt/retropie/configs/nes/retroarch.cfg
+           
+           # Neo Geo Pocket
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/ngp/retroarch-overlay-chito-ngp.cfg /opt/retropie/configs/ngp/retroarch.cfg
+           
+           # SNES
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/snes/retroarch-overlay-chito-snes.cfg /opt/retropie/configs/snes/retroarch.cfg
+           
+           # Wonderswan
+           cp ~/rp-video-manager/users/chito/system-retroarch-cfg/wonderswan/retroarch-overlay-chito-wonderswan.cfg /opt/retropie/configs/wonderswan/retroarch.cfg
+           
+           
+           
+           echo "Overlays have been applied for Game Gear, GameBoy, GameBoy Advance GameBoy Colour, Mastersystem, Megadrive, NES, Neo Geo Pocket, SNES and Wonderswan"
+				echo "There are no shaders applied with these settings"
+				echo "These settings are from https://github.com/israelperez/retro-gaming"
+				echo ""
+                break
+                ;;
+
                   
-               7) # quit
+               8) # quit
                   break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
                   ;;
                *) # always allow for the unexpected

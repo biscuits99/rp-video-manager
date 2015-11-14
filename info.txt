@@ -17,6 +17,31 @@ This copies the extra overlays and shaders etc.. across to the correct directori
 "Use Shaders"
 This will apply a shader file to the systems, as opposed to using overlays at all.
 
+"CRT Shader"
+This is from davej
+http://blog.petrockblock.com/forums/topic/crt-pi-a-pi2-friendly-crt-shader/
+There are some variables set at the top of the shaders/crt-pi.glsl file that can be used to control some aspects of the shader.
+
+#define MULTISAMPLE
+#define CURVATURE
+#define BARREL_DISTORTION_X 0.15
+#define BARREL_DISTORTION_Y 0.25
+#define MASK_BRIGHTNESS 0.65
+#define SCAN_LINE_WEIGHT 6.0
+#define BLOOM_FACTOR 1.5
+#define INPUT_GAMMA 2.4
+#define OUTPUT_GAMMA 2.2
+
+You can change the curvature by changing the BARREL_DISTORTION_X and BARREL_DISTORTION_Y values (0.0 will turn it off for that dimension). Better, you can turn if off entirely by commenting out the CURVATURE line (put a double slash // at the start of the line). This will cause it to skip the distortion code and speeds up the shader a bit. The barrel and mask shaders can be similarly controlled but just have the BARREL_DISTORTION_X and BARREL_DISTORTION_Y values.
+
+You can similarly comment out the MULTISAMPLE line and speed things up a bit by skipping the multi-sample code at the risk of increasing moire effects.
+
+MASK_BRIGHTNESS controls how bright the screen will be.
+
+You’re best leaving the others alone. Altering SCAN_LINE_WEIGHT and BLOOM_FACTOR will likely make moire effects worse. The two GAMMA values affect brightness and should not need changing on a correctly configured monitor (and if you monitor is not correctly configured, fixing that is a far better idea).
+
+It’s perhaps worth pointing out that the shader is designed to be used with linear filtering. CRT electron beams are not square and the combination of linear filtering with scan lines and bloom makes the edges of bright pixels next to dark pixels rounded which looks a bit more accurate. People are of course free to set filtering to nearest if they prefer.
+
 "Overlays"
 These are the settings from user "patl" found here:
 http://blog.petrockblock.com/forums/topic/scanlines-overlays-an-configs-for-softer-look/
@@ -46,6 +71,10 @@ patrickm has said "some people might prefer 4x because the scanlines are slightl
 
 "Thorig-1080p"
 These settings are using new custom overlays that have a different TV overlay used.
+
+"Chito-1080p"
+These settings are using new custom overlays that have a different TV overlay used.
+https://github.com/israelperez/retro-gaming
 
 "Consoles-720p"
 These are the settings from user "patrickm" found here:

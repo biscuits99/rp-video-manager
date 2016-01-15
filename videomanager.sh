@@ -805,7 +805,7 @@ do
 
     
     
-                echo "Overlays have been applied for SNES, Megadrive, Mastersysten, Neo Geo, NES and PSX"
+                echo "Overlays have been applied for SNES, Megadrive, Mastersysten, Neo Geo, NES, PC Engine and PSX"
 				echo "There are no shaders applied with these settings"
 				echo "These settings are from user thorig: http://blog.petrockblock.com/community/members/thorig/"
 				echo ""

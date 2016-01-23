@@ -20,6 +20,7 @@ This will apply a shader file to the systems, as opposed to using overlays at al
 "CRT Shader"
 This is from davej
 http://blog.petrockblock.com/forums/topic/crt-pi-a-pi2-friendly-crt-shader/
+http://blog.petrockblock.com/forums/topic/new-crt-pi-shader-version/
 There are some variables set at the top of the shaders/crt-pi.glsl file that can be used to control some aspects of the shader.
 
 #define MULTISAMPLE

@@ -38,7 +38,7 @@ uniform float OUTPUT_GAMMA;
 #endif
 
 /* COMPATIBILITY
-   - GLSL compilers
+   - GLSL compilers compatible with those associated with OpenGL 2.1 and OpenGL ES 2.0.
 */
 
 /*
@@ -54,13 +54,18 @@ uniform float OUTPUT_GAMMA;
 
 Notes:
 
-This shader is designed to work well on Raspberry Pi GPUs (i.e. 1080P @ 60Hz on a game with a 4:3 aspect ratio). It pushes the Pi's GPU hard and enabling some features will slow it down so that it is no longer able to match 1080P @ 60Hz. You will need to overclock your Pi to the fastest setting in raspi-config to get the best results from this shader: 'Pi2' for Pi2 and 'Turbo' for original Pi and Pi Zero. Note: Pi2s are slower at running the shader than other Pis, this seems to be down to Pi2s lower maximum memory speed. (See the note about FAKE_GAMMA if you have a Pi2.)
+This shader is designed to work well on Raspberry Pi GPUs (i.e. 1080P @ 60Hz on a game with a 4:3 aspect ratio). It pushes the Pi's SOC hard and enabling some features will slow it down so that it is no longer able to match 1080P @ 60Hz. You will need to overclock your Pi to the fastest setting in raspi-config to get the best results from this shader: 'Pi2' for Pi2 and 'Turbo' for original Pi and Pi Zero. If your Pi is unstable at those settings, keep the memory speed as high as you can.
 
-SCANLINES enables scanlines. You'll almost certainly want to use it with MULTISAMPLE to reduce moire effects. SCANLINE_WEIGHT defines how wide scanlines are (it is an inverse value so a higher number = thinner lines). SCANLINE_GAP_BRIGHTNESS defines how dark the gaps between the scanlines are. Darker gaps between scanlines make moire effects more likely.
+Note for Pi2s: The lower maximum memory speed on Pi2s mean the CPUs and the GPU compete for memory bandwidth. You can help ensure the best performance by doing things that reduce CPU memory accesses such as using a faster emulator (e.g. snes9x_next rather than pocketsnes) and changing the audio resampler driver to 'nearest'.
 
-GAMMA enables gamma correction using the values in INPUT_GAMMA and OUTPUT_GAMMA. FAKE_GAMMA causes it to ignore the values in INPUT_GAMMA and OUTPUT_GAMMA and approximate gamma correction in a way which is faster than true gamma whilst still looking better than having none. You must have GAMMA defined to enable FAKE_GAMMA. If you have a Pi2, you'll need to enable FAKE_GAMMA if you want to get 1080P @ 60Hz.
 
-CURVATURE distorts the screen by CURVATURE_X and CURVATURE_Y. Curvature slows things down a lot.
+Configuration notes:
+
+SCANLINES enables scanlines. You'll almost certainly want to use it with MULTISAMPLE to reduce moire effects. SCANLINE_WEIGHT defines how wide scanlines are (it is an inverse value so a higher number = thinner lines). SCANLINE_GAP_BRIGHTNESS defines how dark the gaps between the scan lines are. Darker gaps between scan lines make moire effects more likely.
+
+GAMMA enables gamma correction using the values in INPUT_GAMMA and OUTPUT_GAMMA. FAKE_GAMMA causes it to ignore the values in INPUT_GAMMA and OUTPUT_GAMMA and approximate gamma correction in a way which is faster than true gamma whilst still looking better than having none. You must have GAMMA defined to enable FAKE_GAMMA.
+
+CURVATURE distorts the screen by CURVATURE_X and CURVATURE_Y.
 
 By default the shader uses linear blending horizontally. If you find this too blury, enable SHARPER.
 
@@ -96,7 +101,7 @@ void main()
 #if defined(CURVATURE)
 	screenScale = TextureSize / InputSize;
 #endif
-	filterWidth = InputSize.y / OutputSize.y;
+	filterWidth = (InputSize.y / OutputSize.y) / 3.0;
 	TEX0 = TexCoord;
 	gl_Position = MVPMatrix * VertexCoord;
 }
@@ -137,9 +142,9 @@ float CalcScanLine(float dy)
 {
 	float scanLineWeight = CalcScanLineWeight(dy);
 #if defined(MULTISAMPLE)
-	scanLineWeight += CalcScanLineWeight(dy-filterWidth/3.0);
-	scanLineWeight += CalcScanLineWeight(dy+filterWidth/3.0);
-	scanLineWeight /= 3.0;
+	scanLineWeight += CalcScanLineWeight(dy-filterWidth);
+	scanLineWeight += CalcScanLineWeight(dy+filterWidth);
+	scanLineWeight *= 0.33333;
 #endif
 	return scanLineWeight;
 }
@@ -188,13 +193,15 @@ void main()
 		vec3 colour = texture2D(Texture, tc).rgb;
 
 #if defined(SCANLINES)
+
 #if defined(GAMMA)
 #if defined(FAKE_GAMMA)
 		colour = colour * colour;
 #else
-		colour = pow(colour, vec3(2.4));
+		colour = pow(colour, vec3(INPUT_GAMMA));
 #endif
 #endif
+
 		scanLineWeight *= BLOOM_FACTOR;
 		colour *= scanLineWeight;
 
@@ -202,27 +209,31 @@ void main()
 #if defined(FAKE_GAMMA)
 		colour = sqrt(colour);
 #else
-		colour = pow(colour, vec3(1.0/2.2));
+		colour = pow(colour, vec3(1.0/OUTPUT_GAMMA));
 #endif
 #endif
+
 #endif
+
 #if MASK_TYPE == 0
 		gl_FragColor = vec4(colour, 1.0);
 #else
 #if MASK_TYPE == 1
-		float whichMask = floor(mod(gl_FragCoord.x, 2.0));
+		float whichMask = fract(gl_FragCoord.x * 0.5);
 		vec3 mask;
-		if (whichMask == 1.0)
+		if (whichMask < 0.5)
 			mask = vec3(MASK_BRIGHTNESS, 1.0, MASK_BRIGHTNESS);
 		else
 			mask = vec3(1.0, MASK_BRIGHTNESS, 1.0);
 #elif MASK_TYPE == 2
-		float whichMask = floor(mod(gl_FragCoord.x, 3.0));
-		vec3 mask = vec3(1.0, MASK_BRIGHTNESS, MASK_BRIGHTNESS);
-		if (whichMask == 1.0)
-			mask = vec3(MASK_BRIGHTNESS, 1.0, MASK_BRIGHTNESS);
-		else if (whichMask == 2.0)
-			mask = vec3(MASK_BRIGHTNESS, MASK_BRIGHTNESS, 1.0);
+		float whichMask = fract(gl_FragCoord.x * 0.33333);
+		vec3 mask = vec3(MASK_BRIGHTNESS, MASK_BRIGHTNESS, MASK_BRIGHTNESS);
+		if (whichMask < 0.333)
+			mask.x = 1.0;
+		else if (whichMask < 0.666)
+			mask.y = 1.0;
+		else
+			mask.z = 1.0;
 #endif
 
 		gl_FragColor = vec4(colour * mask, 1.0);

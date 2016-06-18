@@ -8,7 +8,7 @@ www.smartretro.co.uk/forums
 
 Tool to quickly update video modes in RetroPie. This will swap between default, shaders and overlays. Designed to emulate a CRT experience on a hi-def TV.
 
-Currently only supports RetroPie 3 versions (not 2.6.0). And it WILL overwrite any custom edits you may have made to system specific retroarch.cfg files.
+Only supports RetroPie 3 versions (not 2.6.0). And it WILL overwrite any custom edits you may have made to system specific retroarch.cfg files. BACKUP before you use this!!
 
 Example of the changes this makes here:
 https://www.youtube.com/watch?v=wf7M0iOLcrk

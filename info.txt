@@ -82,6 +82,22 @@ These are the settings from user "patrickm" found here:
 http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/
 These are designed for a 720p screen
 
+"Arcade Bezels"
+This will apply overlays on a per rom basis including shaders. The curvature effect is on by default but you can turn this off if you edit
+/opt/retropie/emulators/retroarch/shader/arcade-bezel-shader/shaders/crt-pi.glsl
+/opt/retropie/emulators/retroarch/shader/arcade-bezel-shader/shaders/crt-pi-vertical.glsl
+#define CURVATURE = on
+//#define CURVATURE = off
+
+The curvature effect is fairly CPU intensive (if you see a small yellow square in the top right of your screen the Pi has capped the CPU to try and bring the temperature back down)
+
+Credits to:
+John.Merrit for overlays: http://libretro.com/forums/showthread.php?t=5085
+davej for shaders: http://libretro.com/forums/showthread.php?t=4937
+
+You can remove the per rom .cfg using the "Config Menu". This will delete ALL .cfg files in that directory.
+/home/pi/RetroPie/roms/mame-libretro/
+
 "Quit"
 This will exit the tool, making no changes.
 

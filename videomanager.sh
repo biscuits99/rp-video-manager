@@ -25,7 +25,7 @@ do
          do
            echo "Configuration Menu"
            PS3=$CONFIGPROMPT
-           select option1 in "Backup Settings" "Restore Backup" "Reset to Default" "Install Required Files" "Set MD to Picodrive" "Set MD to GenesisPlusGX" "Set NES to Nestopia" "Set NES to Fceumm" "Remove ALL Arcade Bezel configs" Quit
+           select option1 in "Backup Settings" "Restore Backup" "Reset to Default" "Install Required Files" "Remove ALL Arcade Bezel configs" Quit
            do
              case $REPLY in
                1) # Backup Settings
@@ -84,14 +84,11 @@ do
     # Sega CD
             cp  /opt/retropie/configs/segacd/retroarch.cfg ~/rp-video-manager/backup/segacd/retroarch-backup.cfg
     
-    # Doom
-            cp  /opt/retropie/configs/doom/retroarch.cfg ~/rp-video-manager/backup/doom/retroarch-backup.cfg
-    
-    # Quake
-            cp  /opt/retropie/configs/quake/retroarch.cfg ~/rp-video-manager/backup/quake/retroarch-backup.cfg
+
+  
     
             echo "Backup complete"
-			echo "Backed up Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES, Doom, Quake"
+			echo "Backed up Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES"
     
                   
                   break  #  Breaks out of the select, back to the mango loop.
@@ -153,14 +150,8 @@ do
     # Sega CD
             cp  ~/rp-video-manager/backup/segacd/retroarch-backup.cfg /opt/retropie/configs/segacd/retroarch.cfg
     
-    # Doom
-            cp  ~/rp-video-manager/backup/doom/retroarch-backup.cfg /opt/retropie/configs/ports/doom/retroarch.cfg
-    
-    # Quake
-            cp  ~/rp-video-manager/backup/quake/retroarch-backup.cfg /opt/retropie/configs/ports/quake/retroarch.cfg
-    
             echo "Backup has been restored"
-			echo "Restored Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES, Doom, Quake"
+			echo "Restored Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES"
     
                   
                   break  #  Breaks out of the select, back to the mango loop.
@@ -228,14 +219,9 @@ do
     # Sega CD
     cp ~/rp-video-manager/system-retroarch/segacd/retroarch-original.cfg /opt/retropie/configs/segacd/retroarch.cfg
     
-    # Doom
-    cp ~/rp-video-manager/system-retroarch/doom/retroarch-original.cfg /opt/retropie/configs/ports/doom/retroarch.cfg
-    
-    # Quake
-    cp ~/rp-video-manager/system-retroarch/quake/retroarch-original.cfg /opt/retropie/configs/ports/quake/retroarch.cfg
     
                 echo "Settings are back to default"
-				echo "Reset Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES, Doom, Quake"
+				echo "Reset Atari Lynx, FBA, GG, GB, GBA, GBC, MasterSystem, Megadrive, NeoGeo, NES, PC Engine, PSX, Sega 32x, Sega CD, SNES"
 				   
                   
                   break  #  Breaks out of the select, back to the mango loop.
@@ -248,42 +234,43 @@ do
                    echo "Please wait (Should take under 5 mins)"
     
     # Copy Shaders across
-            cp ~/rp-video-manager/shaders/crt-hyllian-sharpness-hack.glsl /opt/retropie/emulators/retroarch/shader/crt-hyllian-sharpness-hack.glsl
-            cp ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/Brighter-with_Contrast.glslp
+            sudo cp -u ~/rp-video-manager/shaders/crt-hyllian-sharpness-hack.glsl /opt/retropie/emulators/retroarch/shader/crt-hyllian-sharpness-hack.glsl
+            sudo cp -u ~/rp-video-manager/shaders/Brighter-with_Contrast.glslp /opt/retropie/emulators/retroarch/shader/Brighter-with_Contrast.glslp
     
     # General overlays
-            mkdir -p /opt/retropie/emulators/retroarch/overlays/1080p_4-3
-            cp -r ~/rp-video-manager/1080p_4-3/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
+            sudo mkdir -p /opt/retropie/emulators/retroarch/overlays/1080p_4-3
+            sudo cp -r ~/rp-video-manager/1080p_4-3/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
     
     # Thorig overlays
-    cp -r ~/rp-video-manager/users/thorig/overlays/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
+    sudo cp -r ~/rp-video-manager/users/thorig/overlays/* /opt/retropie/emulators/retroarch/overlays/1080p_4-3/
     
     # davej Shaders
-    cp -r ~/rp-video-manager/users/davej/shaders/crt-pi/* /opt/retropie/emulators/retroarch/shader/
+    sudo cp -r ~/rp-video-manager/users/davej/shaders/crt-pi/* /opt/retropie/emulators/retroarch/shader/
     
     # Chito Overlays
-    mkdir -p /opt/retropie/emulators/retroarch/overlays/chito
-    cp -r ~/rp-video-manager/users/chito/overlays/* /opt/retropie/emulators/retroarch/overlays/chito/
+    sudo mkdir -p /opt/retropie/emulators/retroarch/overlays/chito
+    sudo cp -r ~/rp-video-manager/users/chito/overlays/* /opt/retropie/emulators/retroarch/overlays/chito/
     
     # Arcade Bezels
-    mkdir -p /opt/retropie/emulators/retroarch/shader/arcade-bezel-shader
-    cp -r ~/rp-video-manager/users/arcade-bezels/arcade-bezel-shader/* /opt/retropie/emulators/retroarch/shader/arcade-bezel-shader/
+    sudo mkdir -p /opt/retropie/emulators/retroarch/shader/arcade-bezel-shader
+    sudo cp -r ~/rp-video-manager/users/arcade-bezels/arcade-bezel-shader/* /opt/retropie/emulators/retroarch/shader/arcade-bezel-shader/
     
-    mkdir -p /opt/retropie/emulators/retroarch/overlays/arcade-bezel-overlays
-    cp -r ~/rp-video-manager/users/arcade-bezels/arcade-bezel-overlays/* /opt/retropie/emulators/retroarch/overlays/arcade-bezel-overlays/
+    sudo mkdir -p /opt/retropie/emulators/retroarch/overlays/arcade-bezel-overlays
+    sudo cp -r ~/rp-video-manager/users/arcade-bezels/arcade-bezel-overlays/* /opt/retropie/emulators/retroarch/overlays/arcade-bezel-overlays/
         
     
     # Gameboy Palette
-    mkdir -p /home/pi/RetroPie/BIOS/palettes
-    cp ~/rp-video-manager/shaders/default.pal /home/pi/RetroPie/BIOS/palettes/
+    sudo mkdir -p /home/pi/RetroPie/BIOS/palettes
+    sudo cp ~/rp-video-manager/shaders/default.pal /home/pi/RetroPie/BIOS/palettes/
     
     # Copy Overlay for patrickm settings. From the shaders dir which isnt quite right but it doesnt matter.
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.cfg
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.png
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.cfg
-    cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.png
+    sudo mkdir -p /opt/retropie/emulators/retroarch/overlays/effects/scanlines
+    sudo cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.cfg
+    sudo cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080-5x.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080-5x.png
+    sudo cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.cfg
+    sudo cp ~/rp-video-manager/shaders/patrickm-scanlines1920x1080.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1920x1080.png
+    sudo cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.cfg /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.cfg
+    sudo cp ~/rp-video-manager/shaders/patrickm-scanlines1280x720.png /opt/retropie/emulators/retroarch/overlays/effects/scanlines/patrickm-scanlines1280x720.png
 
     
     echo "Required files installed - you dont need to run this again"
@@ -293,60 +280,9 @@ do
                   break  #  Breaks out of the select, back to the mango loop.
                   ;;
                   
+       
                   
-               5) # Set MD to Picodrive
-                  echo ""
-                  echo ""
-                  
-                  cp ~/rp-video-manager/system-retroarch/emulators/megadrive-picodrive-emulators.cfg /opt/retropie/configs/megadrive/emulators.cfg
-                  
-                  
-                  
-                  echo "Megadrive emulator set to use Picodrive"
-                  echo "It is recommended to use Genesis Plus GX for the overlays to work as well as possible"
-                  echo "You can change this here, or use the normal method of pressing x when starting a game"
-                  
-                  break  #  Breaks out of the select, back to the mango loop.
-                  ;;
-                  
-                
-                6) # Set MD to GenesisPlusGX
-                  echo ""
-                  echo ""
-                  
-                  cp ~/rp-video-manager/system-retroarch/emulators/megadrive-genesisplusgx-emulators.cfg /opt/retropie/configs/megadrive/emulators.cfg
-                  
-                  
-                  echo "Megadrive emulator set to use Genesis Plus GX"
-                  echo "It is recommended to use Genesis Plus GX for the overlays to work as well as possible"
-                  echo "You can change this here, or use the normal method of pressing x when starting a game"
-                  
-                  break  #  Breaks out of the select, back to the mango loop.
-                  ;;
-                  
-                  7) # Set NES to Nestopia
-                  echo ""
-                  echo ""
-                  
-                  cp ~/rp-video-manager/system-retroarch/emulators/nes-nestopia-emulators.cfg /opt/retropie/configs/nes/emulators.cfg
-                  
-                  echo "NES Emulator set to use Nestopia"
-                  
-                  break  #  Breaks out of the select, back to the mango loop.
-                  ;;                
-                  
-                  8) # Set NES to Fceumm
-                  echo ""
-                  echo ""
-                  
-                  cp ~/rp-video-manager/system-retroarch/emulators/nes-fceumm-emulators.cfg /opt/retropie/configs/nes/emulators.cfg
-                  
-                  echo "NES Emulator set to use Fceumm"
-                  
-                  break  #  Breaks out of the select, back to the mango loop.
-                  ;;                
-                  
-                  9) # Remove ALL Arcade Bezel configs
+                  5) # Remove ALL Arcade Bezel configs
                   echo ""
                   echo ""
                   rm -f /home/pi/RetroPie/roms/mame-libretro/*.cfg
@@ -358,7 +294,7 @@ do
                   break  #  Breaks out of the select, back to the mango loop.
                   ;;  
                   
-               10) # Quit
+               6) # Quit
                   break 2  # Breaks out 2 levels, the select loop plus the mango while loop, back to the main loop.
                   ;;
                   
@@ -455,8 +391,6 @@ do
      echo ""
      echo ""
      
-     # Doom
-     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/doom/retroarch-shader-davej-doom.cfg /opt/retropie/configs/ports/doom/retroarch.cfg
 
      # FBA
      cp ~/rp-video-manager/users/davej/system-retroarch-cfg/fba/retroarch-shader-davej-fba.cfg /opt/retropie/configs/fba/retroarch.cfg
@@ -485,8 +419,6 @@ do
      # PSX
      cp ~/rp-video-manager/users/davej/system-retroarch-cfg/psx/retroarch-shader-davej-psx.cfg /opt/retropie/configs/psx/retroarch.cfg
      
-     # Quake
-     cp ~/rp-video-manager/users/davej/system-retroarch-cfg/quake/retroarch-shader-davej-quake.cfg /opt/retropie/configs/ports/quake/retroarch.cfg
      
      # Sega32x
      cp ~/rp-video-manager/users/davej/system-retroarch-cfg/sega32x/retroarch-shader-davej-sega32x.cfg /opt/retropie/configs/sega32x/retroarch.cfg
@@ -498,7 +430,7 @@ do
      cp ~/rp-video-manager/users/davej/system-retroarch-cfg/snes/retroarch-shader-davej-snes.cfg /opt/retropie/configs/snes/retroarch.cfg
      
       echo "CRT Shader has now been applied"
-                echo "Shaders have been applied to Doom, FBA, MAME-Libretro, MAME-Mame4all, Mastersystem, Megadrive, Neo Geo, NES, PC Engine, PSX, Quake, Sega32x, Sega CD, SNES"
+                echo "Shaders have been applied to FBA, MAME-Libretro, MAME-Mame4all, Mastersystem, Megadrive, Neo Geo, NES, PC Engine, PSX, Sega32x, Sega CD, SNES"
                 echo ""
      break
      ;;
@@ -732,14 +664,10 @@ do
     # PSX
     cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/psx/retroarch.cfg
     
-    # Doom
-    cp ~/rp-video-manager/system-retroarch/doom/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/ports/doom/retroarch.cfg
-    
-    # Quake
-    cp ~/rp-video-manager/system-retroarch/quake/retroarch-overlay-patrickm-5x-noshader.cfg /opt/retropie/configs/ports/quake/retroarch.cfg
+
     
     
-                echo "Overlays 5x integer scale applied for SNES, Mastersystem, Megadrive, Sega CD, Sega 32x, NES, PC Engine, PSX, Doom, Quake"
+                echo "Overlays 5x integer scale applied for SNES, Mastersystem, Megadrive, Sega CD, Sega 32x, NES, PC Engine, PSX"
 				echo "There are no shaders applied with these settings"
                 echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
 				echo "http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/"
@@ -775,14 +703,9 @@ do
     # PSX
     cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm.cfg /opt/retropie/configs/psx/retroarch.cfg
     
-    # Doom
-    cp ~/rp-video-manager/system-retroarch/doom/retroarch-overlay-patrickm.cfg /opt/retropie/configs/ports/doom/retroarch.cfg
-    
-    # Quake
-    cp ~/rp-video-manager/system-retroarch/quake/retroarch-overlay-patrickm.cfg /opt/retropie/configs/ports/quake/retroarch.cfg
     
     
-                echo "Overlays 4x integer scale applied for SNES, Megadrive, Sega CD, NES, PC Engine, PSX, Doom, Quake"
+                echo "Overlays 4x integer scale applied for SNES, Megadrive, Sega CD, NES, PC Engine, PSX"
 				echo "There are no shaders applied with these settings"
                 echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
 				echo "http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/"
@@ -939,14 +862,9 @@ do
     # PSX
     cp ~/rp-video-manager/system-retroarch/psx/retroarch-overlay-patrickm-720p.cfg /opt/retropie/configs/psx/retroarch.cfg
     
-    # Doom
-    cp ~/rp-video-manager/system-retroarch/doom/retroarch-overlay-patrickm-720p.cfg /opt/retropie/configs/ports/doom/retroarch.cfg
-    
-    # Quake
-    cp ~/rp-video-manager/system-retroarch/quake/retroarch-overlay-patrickm-720p.cfg /opt/retropie/configs/ports/quake/retroarch.cfg
     
     
-                echo "Overlays 3x integer scale (720p) applied for SNES, Megadrive, NES, PSX, Doom, Quake"
+                echo "Overlays 3x integer scale (720p) applied for SNES, Megadrive, NES, PSX"
 				echo "There are no shaders applied with these settings"
                 echo "Genesis-Plus-GX is best used for the Megadrive emulator with these settings"
 				echo "http://blog.petrockblock.com/forums/topic/list-of-recommended-shaders-for-raspberry-piretropie-how-to-get-the-crt-look/"

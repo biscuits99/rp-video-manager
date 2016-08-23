@@ -11,6 +11,8 @@ Tool to quickly update video modes in RetroPie. This will swap between default, 
 Only supports RetroPie 3 versions. I would suggest using RetroPie 3.8.1 and above. And it WILL overwrite any custom edits you may have made to system specific retroarch.cfg files. BACKUP before you use this!!
 
 Example of the changes this makes here:
+https://www.youtube.com/watch?v=SCqQ7ciCHcI
+
 https://www.youtube.com/watch?v=wf7M0iOLcrk
 
 Installation

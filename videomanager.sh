@@ -260,8 +260,8 @@ do
         
     
     # Gameboy Palette
-    sudo mkdir -p /home/pi/RetroPie/BIOS/palettes
-    sudo cp ~/rp-video-manager/shaders/default.pal /home/pi/RetroPie/BIOS/palettes/
+    sudo mkdir -p /home/${USER}/RetroPie/BIOS/palettes
+    sudo cp ~/rp-video-manager/shaders/default.pal /home/${USER}/RetroPie/BIOS/palettes/
     
     # Copy Overlay for patrickm settings. From the shaders dir which isnt quite right but it doesnt matter.
     sudo mkdir -p /opt/retropie/emulators/retroarch/overlays/effects/scanlines
@@ -285,9 +285,9 @@ do
                   5) # Remove ALL Arcade Bezel configs
                   echo ""
                   echo ""
-                  rm -f /home/pi/RetroPie/roms/mame-libretro/*.cfg
+                  rm -f /home/${USER}/RetroPie/roms/mame-libretro/*.cfg
 
-                  echo "ALL .cfg files have been removed from /home/pi/RetroPie/roms/mame-libretro"
+                  echo "ALL .cfg files have been removed from /home/${USER}/RetroPie/roms/mame-libretro"
                   
                   echo ""
                   echo ""
@@ -807,10 +807,10 @@ do
            
            
            # Arcade Bezel configs with shader settings
-           cp ~/rp-video-manager/users/arcade-bezels/arcade-bezel-retroarch-configs/Done/*.cfg /home/pi/RetroPie/roms/mame-libretro/
+           cp ~/rp-video-manager/users/arcade-bezels/arcade-bezel-retroarch-configs/Done/*.cfg /home/${USER}/RetroPie/roms/mame-libretro/
  
            
-           echo "Arcade bezel configs have been copied to /home/pi/RetroPie/roms/mame-libretro - these will apply to matching roms with MAME 2003"
+           echo "Arcade bezel configs have been copied to /home/${USER}/RetroPie/roms/mame-libretro - these will apply to matching roms with MAME 2003"
 				echo "You can of course manually copy these configs (romname.zip.cfg) to any libretro mame/fba based rom folder you want"
 				echo ""
 				echo "Remember you can manually turn the curvature effect on and off (to reduce CPU use) by manually editing nano /opt/retropie/emulators/retroarch/shader/arcade-bezel-shader/shaders/crt-pi.glsl"
